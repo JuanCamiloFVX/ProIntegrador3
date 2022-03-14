@@ -6,7 +6,7 @@ import { NavigationContainer } from "@react-navigation/native";
 //screens
 import HomeScreen from "./screens/HomeScreen";
 import SettingsScreen from "./screens/SettingsScreen";
-import StackScreen from "./screens/StackScreen";
+import LoginScreen from "./screens/LoginScreen";
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -23,9 +23,9 @@ function MyStack() {
             />
             <HomeStackNavigator.Screen
                 name="Login"
-                component={StackScreen}
+                component={LoginScreen}
                 options={{
-                    headerBackTitleVisible: true,
+                    headerBackTitleVisible: false,
                 }}
             />
         </HomeStackNavigator.Navigator>
@@ -44,7 +44,7 @@ function MyTabs() {
         }}
       >
         <Tab.Screen 
-            name="USER" 
+            name="bottom" 
             component={MyStack} 
             options={{
                 tabBarLabel: 'Home',

@@ -7,8 +7,9 @@ const HomeScreen = () => {
     const navigation = useNavigation();
   
     useEffect(() => {
+        
         navigation.setOptions({
-            headerLargeTitle: true,
+            headerTitle: true,
             headerTitle: "Proyecto Integrador",
             headerRight: () => (
                 <TouchableOpacity
@@ -31,12 +32,13 @@ const HomeScreen = () => {
                 </TouchableOpacity>
             ),
          
-        });
+        }
+        );
     }, [navigation]);
 
   
     return (
-        <ScrollView>
+        <ScrollView >
            
         </ScrollView>
     );
@@ -44,6 +46,4 @@ const HomeScreen = () => {
 
 export default HomeScreen;
 
-const styles = StyleSheet.create({
-   
-});
+
