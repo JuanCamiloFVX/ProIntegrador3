@@ -22,7 +22,7 @@ function MyStack() {
                 component={HomeScreen}
             />
             <HomeStackNavigator.Screen
-                name="Stack"
+                name="Login"
                 component={StackScreen}
                 options={{
                     headerBackTitleVisible: true,
@@ -40,14 +40,14 @@ function MyTabs() {
       <Tab.Navigator
         initialRouteName="Home"
         screenOptions= {{
-            tabBarActiveTintColor: 'purple',
+            tabBarActiveTintColor: '#04bf9d',
         }}
       >
         <Tab.Screen 
-            name="Home" 
+            name="USER" 
             component={MyStack} 
             options={{
-                tabBarLabel: 'Feed',
+                tabBarLabel: 'Home',
                 tabBarIcon: ({ color, size }) => (
                     <MaterialCommunityIcons name="home" color={color} size={30} />
                 ),
@@ -55,16 +55,7 @@ function MyTabs() {
                 headerShown: false,
             }}
         />
-        <Tab.Screen 
-            name="Settings" 
-            component={SettingsScreen}
-            options={{
-                tabBarLabel: 'Settings',
-                tabBarIcon: ({ color, size }) => (
-                    <MaterialCommunityIcons name="brightness-5" color={color} size={30} />
-                ),
-            }}
-        />
+   
     </Tab.Navigator>
     );
 }
