@@ -1,18 +1,23 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity,Image } from "react-native";
+import { Button } from "react-native-paper";
 
 const StackScreen = () => {
     return (
         <View>
-            <Text
-                style={{
-                    fontSize: 30,
-                    textAlign: "center",
-                    marginTop: "20%"
-                }}
-            >Stack Screen</Text>
+      
+       
         </View>
     );
     }
 
 export default StackScreen;
+
+
+const styles = StyleSheet.create({
+
+
+
+
+
+})
