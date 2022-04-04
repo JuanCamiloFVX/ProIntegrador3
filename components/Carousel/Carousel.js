@@ -2,22 +2,18 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Carousel, { Pagination } from "react-native-snap-carousel";
-import CarouselCardItem, {
-  SLIDER_WIDTH,
-  ITEM_WIDTH,
-} from "./CarouselCardItem";
+import CarouselCardItem, { SLIDER_WIDTH, ITEM_WIDTH } from "./CarouselCardItem";
 import data from "../data/data";
+import { Button } from "react-native-paper";
 
-const CarouselCards = () => {
+const CarouselCards = ({ navigation }) => {
   const [index, setIndex] = React.useState(0);
   const isCarousel = React.useRef(null);
 
   return (
-    <SafeAreaView style={styles.safeAreaView}>
+    
       <View style={styles.view2}>
         <Carousel
-          
-         
           layout="tinder"
           layoutCardOffset={9}
           ref={isCarousel}
@@ -38,36 +34,29 @@ const CarouselCards = () => {
           tappableDots={true}
         />
       </View>
-    </SafeAreaView>
   );
 };
 
 export default CarouselCards;
 
 const styles = StyleSheet.create({
-
-
   dotActive: {
     width: 10,
     height: 10,
     borderRadius: 5,
     marginHorizontal: 0,
-    backgroundColor: 'white',
-    
+    backgroundColor: "white",
   },
   safeAreaView: {
-
     flex: 1,
-    backgroundColor: '#253659',
-    paddingTop: 60
-    
+    backgroundColor: "#253659",
+    paddingTop: 60,
   },
 
-  view2:{
-
-    display: 'flex',
-    justifyContent:'center',
-    alignItems:'center',
-    height: '100%'
-  }
+  view2: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100%",
+  },
 });

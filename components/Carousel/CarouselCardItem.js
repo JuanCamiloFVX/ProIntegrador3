@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#03A696',
     borderRadius: 5,
     width: ITEM_WIDTH,
-    height:530,
+    height:500,
     paddingBottom: 20,
     shadowOpacity: 0.29,
     shadowRadius: 4.65,
@@ -36,6 +36,8 @@ const styles = StyleSheet.create({
     height: 200,
     width: 200,
     alignSelf:'center',
+    position:'absolute',
+    top: 70,
   },
   header: {
     color: "#fff",

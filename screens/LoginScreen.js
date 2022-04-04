@@ -211,7 +211,7 @@ const LoginScreen = ({ navigation }) => {
                 marginTop: 15,
               },
             ]}
-            onPress={() => navigation.navigate("TabNavigation")}
+            onPress={() => navigation.navigate("CarouselScreen")}
           >
             <Text
               style={[

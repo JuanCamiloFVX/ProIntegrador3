@@ -7,7 +7,4 @@ export default data = [
       title: "Monitor your daily progress",
       imgUrl: "https://i.ibb.co/tc36csQ/1.png"
     },
-    {
-      title: "Get   Started",
-    }
   ]
