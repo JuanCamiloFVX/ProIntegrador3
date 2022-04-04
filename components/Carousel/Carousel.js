@@ -6,13 +6,13 @@ import CarouselCardItem, { SLIDER_WIDTH, ITEM_WIDTH } from "./CarouselCardItem";
 import data from "../data/data";
 import { Button } from "react-native-paper";
 
-const CarouselCards = ({ navigation }) => {
+const CarouselCards = () => {
   const [index, setIndex] = React.useState(0);
   const isCarousel = React.useRef(null);
 
   return (
-    
-      <View style={styles.view2}>
+    <View style={styles.view2}>
+      <View style={styles.view3}>
         <Carousel
           layout="tinder"
           layoutCardOffset={9}
@@ -24,6 +24,8 @@ const CarouselCards = ({ navigation }) => {
           onSnapToItem={(index) => setIndex(index)}
           useScrollView={true}
         />
+      </View>
+      <View>
         <Pagination
           dotsLength={data.length}
           activeDotIndex={index}
@@ -34,6 +36,7 @@ const CarouselCards = ({ navigation }) => {
           tappableDots={true}
         />
       </View>
+    </View>
   );
 };
 
@@ -50,13 +53,18 @@ const styles = StyleSheet.create({
   safeAreaView: {
     flex: 1,
     backgroundColor: "#253659",
-    paddingTop: 60,
   },
 
   view2: {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    height: "100%",
+    height: "94%",
   },
+  view3: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    left:-16
+  }
 });

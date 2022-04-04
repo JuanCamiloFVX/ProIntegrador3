@@ -22,10 +22,13 @@ const styles = StyleSheet.create({
 
 
   container: {
-    backgroundColor: '#03A696',
+
+    display: 'flex',
+    justifyContent: 'center', 
+    backgroundColor: '#253659',
     borderRadius: 5,
-    width: ITEM_WIDTH,
-    height:500,
+    width:330,
+    height:'100%',
     paddingBottom: 20,
     shadowOpacity: 0.29,
     shadowRadius: 4.65,
@@ -37,13 +40,13 @@ const styles = StyleSheet.create({
     width: 200,
     alignSelf:'center',
     position:'absolute',
-    top: 70,
+    top: 200,
   },
   header: {
-    color: "#fff",
-    fontSize: 40,
+    color: "#fff", 
+    fontSize: 34,
     position: 'absolute',
-    bottom:20,
+    bottom:60,
     alignSelf:'center',
     fontWeight: "bold",
     textAlign:'center',
