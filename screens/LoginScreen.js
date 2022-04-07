@@ -14,7 +14,6 @@ import {
 } from "react-native";
 
 import * as Animatable from "react-native-animatable";
-import LinearGradient from "react-native-linear-gradient";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Feather from "react-native-vector-icons/Feather";
 
@@ -81,6 +80,27 @@ const LoginScreen = ({ navigation }) => {
       });
     }
   };
+  const loginHandle = (userName, password) => {
+
+    const foundUser = Users.filter( item => {
+        return userName == item.username && password == item.password;
+    } );
+
+    if ( data.username.length == 0 || data.password.length == 0 ) {
+        Alert.alert('Wrong Input!', 'Usuario o Contraseña no debe estar vacio.', [
+            {text: 'Okay'}
+        ]);
+        return;
+    }
+
+    if ( foundUser.length == 0 ) {
+        Alert.alert('Invalid User!', 'Usuario o Conraeña incorrectos.', [
+            {text: 'Okay'}
+        ]);
+        return;
+    }
+    signIn(foundUser);
+}
 
   return (
     <View style={styles.container}>

@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     width: 200,
     alignSelf:'center',
     position:'absolute',
-    top: 200,
+    top: 130,
   },
   header: {
     color: "#fff", 
