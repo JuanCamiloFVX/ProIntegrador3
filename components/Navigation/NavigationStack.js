@@ -5,6 +5,7 @@ import CarouselCards from '../Carousel/Carousel';
 import { enableScreens } from "react-native-screens";
 import { createNativeStackNavigator } from "react-native-screens/native-stack";
 import ButtomTab from "./ButtomTab";
+import Page2 from "../../screens/Page2";
 
 enableScreens();
 const Stack = createNativeStackNavigator();

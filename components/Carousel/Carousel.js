@@ -5,12 +5,16 @@ import Carousel, { Pagination } from "react-native-snap-carousel";
 import CarouselCardItem, { SLIDER_WIDTH, ITEM_WIDTH } from "./CarouselCardItem";
 import data from "../data/data";
 import { Button } from "react-native-paper";
+import * as Animatable from 'react-native-animatable';
 
 const CarouselCards = () => {
   const [index, setIndex] = React.useState(0);
   const isCarousel = React.useRef(null);
 
   return (
+    <Animatable.View
+    animation="fadeInLeftBig"
+    >
     <View style={styles.view2}>
       <View style={styles.view3}>
         <Carousel
@@ -37,6 +41,7 @@ const CarouselCards = () => {
         />
       </View>
     </View>
+    </Animatable.View>
   );
 };
 
