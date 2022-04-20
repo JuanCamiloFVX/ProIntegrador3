@@ -8,16 +8,17 @@ export default function profile() {
 
   const [data, setData] = useState({
     UserName: "NSKAELA",
-    Name: "lucas Grover Valdez",
+    Name: "Lucas Grover Valdez",
     Email: "lucasGroverValdez@gmail.com",
     Phone: "3227885678",
+    Rol: 'Lame culos',
   });
 
   const Name = data.Name;
   const UserName = data.UserName;
   const Email = data.Email;
   const Phone = data.Phone;
-
+  const Rol = data.Rol;
 
   return (
     <SafeAreaView style={Styles.SafeAreaViewPerfil}>
@@ -29,10 +30,11 @@ export default function profile() {
             style={Styles.Image}
             size={120}
             source={{
-            uri: "https://www.teahub.io/photos/full/20-205382_beast-ape-wallpapers-hd-quality-para-perfil-de.jpg",
+            uri: "https://us.123rf.com/450wm/kritchanut/kritchanut1406/kritchanut140600114/29213224-hombre-foto-de-perfil-silueta-avatar.jpg?ver=6",
             }}
           />
           <Text style={Styles.TextName}>{Name}</Text>
+          <Text style={Styles.TextRol}>{Rol}</Text>
         </View>
         <View style={Styles.ViewInformation}>
           <List.Item
@@ -67,7 +69,8 @@ const Styles = StyleSheet.create({
   ViewProfile: {
     alignItems: "center",
     backgroundColor: '#253659',
-    borderRadius: 20,
+    borderBottomRightRadius: 100,
+    borderTopLeftRadius:100,
     justifyContent:'flex-end',  
     height: '90%',
     width: '90%',
@@ -75,11 +78,11 @@ const Styles = StyleSheet.create({
   },
   ViewInformation: {
 
-    width: "89%",
+    width: "100%",
     height: 350,
-    borderRadius:0,
-    backgroundColor:'#03A696',
-    marginBottom:'5%',
+    borderBottomRightRadius:100,
+    backgroundColor:'#FFF',
+    marginBottom:'0%',
 
   },
   
@@ -104,8 +107,14 @@ const Styles = StyleSheet.create({
   TextName: {
     fontSize: 20,
     paddingTop: 15,
-    paddingBottom:15,
-    color: '#04bf9d',
+    paddingBottom:5,
+    color: '#FFF',
+    fontWeight: "bold",
+  },
+
+  TextRol:{
+    fontSize: 12,
+    color: '#B0B5BF',
   },
 
 });
