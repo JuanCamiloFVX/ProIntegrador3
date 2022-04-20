@@ -1,12 +1,10 @@
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { enableScreens } from 'react-native-screens';
 import React from 'react'
-import paper from 'react-native-paper';
 
 import Page1 from '../../screens/Page1';
 import Page2 from '../../screens/Page2';
-import Page3 from '../../screens/Page3';
+import Profile from '../../screens/Profile';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -40,8 +38,8 @@ function ButtomTab() {
         }}
       />
       <Tab.Screen
-        name="Page3"
-        component={Page3}
+        name="Profile"
+        component={Profile}
         options={{
           tabBarLabel: 'Profile',
           tabBarIcon: ({ color }) => (
