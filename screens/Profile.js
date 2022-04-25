@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Avatar, List, Card, Button } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import DialogEdit from "../components/DialogEdit/DialogEdit";
+import * as Animatable from "react-native-animatable";
 
 export default function profile() {
 
@@ -21,28 +22,35 @@ export default function profile() {
   const Rol = data.Rol;
 
   return (
+
     <SafeAreaView style={Styles.SafeAreaViewPerfil}>
+    
       <View style={Styles.ViewProfile}>
+      <Animatable.View animation="fadeInLeft">
       
       <View style={Styles.ViewImage}>
-        <Avatar.Image
 
+        <Avatar.Image
             style={Styles.Image}
             size={120}
             source={{
             uri: "https://us.123rf.com/450wm/kritchanut/kritchanut1406/kritchanut140600114/29213224-hombre-foto-de-perfil-silueta-avatar.jpg?ver=6",
             }}
           />
+
           <Text style={Styles.TextName}>{Name}</Text>
           <Text style={Styles.TextRol}>{Rol}</Text>
         </View>
+        </Animatable.View>
+
         <View style={Styles.ViewInformation}>
+        <Animatable.View animation="fadeInLeft">
           <List.Item
             title="UserName"
             description={UserName}
             left={(props) => <List.Icon {...props} icon="account-circle" color= '#3C537E'/>}
           />
-
+     
           <List.Item
             title="Email"
             description={Email}
@@ -54,11 +62,12 @@ export default function profile() {
             description={Phone}
             left={(props) => <List.Icon {...props} icon="phone" color= '#3C537E'/>}
           />
+          </Animatable.View>
               <DialogEdit data = {data} setData = {setData}/>
           </View>
-            
+          
         </View>
-        
+     
         
     </SafeAreaView>
   );

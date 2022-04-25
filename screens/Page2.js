@@ -2,6 +2,7 @@ import { View, Text } from 'react-native'
 import React from 'react'
 import PowerBi from "../components/PowerBi/powerbi";
 
+
 export default function Page2() {
   return (
     <View style={{ flex:1}}>
