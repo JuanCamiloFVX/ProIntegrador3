@@ -10,6 +10,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@apollo/client": "^3.5.10",
     "@react-native-community/masked-view": "^0.1.11",
     "@react-navigation/material-bottom-tabs": "^5.3.19",
     "@react-navigation/native": "^5.9.8",
@@ -17,6 +18,7 @@
     "@types/react-native-snap-carousel": "^3.8.5",
     "expo": "~43.0.2",
     "expo-status-bar": "~1.1.0",
+    "graphql": "^16.4.0",
     "lodash": "^4.17.21",
     "react": "17.0.1",
     "react-dom": "17.0.1",
