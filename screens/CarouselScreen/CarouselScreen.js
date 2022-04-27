@@ -1,5 +1,5 @@
 import React from "react";
-import CarouselCards from "../components/Carousel/Carousel";
+import CarouselCards from "../../components/Carousel/Carousel";
 import { StyleSheet, View , Text} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Button } from "react-native-paper";

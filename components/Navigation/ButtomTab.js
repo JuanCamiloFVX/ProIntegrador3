@@ -2,9 +2,9 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import React from 'react'
 
-import Page1 from '../../screens/Page1';
-import Page2 from '../../screens/Page2';
-import Profile from '../../screens/Profile';
+import Reports from '../../screens/ReportScreen/Reports';
+import Graphics from '../../screens/GraphicsScreen/Graphics';
+import Profile from '../../screens/ProfileScreen/Profile';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -12,14 +12,14 @@ function ButtomTab() {
   return (
 
     < Tab.Navigator
-      initialRouteName="Page1"
+      initialRouteName="Reports"
       activeColor="#253659"
       inactiveColor="#EDF5F2"
       barStyle={{ backgroundColor: '#03A696' }}
     >
       <Tab.Screen
-        name="Page1"
-        component={Page1}
+        name="Reports"
+        component={Reports}
         options={{
           tabBarLabel: 'Registros',
           tabBarIcon: ({ color }) => (
@@ -28,8 +28,8 @@ function ButtomTab() {
         }}
       />
       <Tab.Screen
-        name="Page2"
-        component={Page2}
+        name="Graphics"
+        component={Graphics}
         options={{
           tabBarLabel: 'Graficos',
           tabBarIcon: ({ color }) => (

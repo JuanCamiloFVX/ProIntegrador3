@@ -2,7 +2,7 @@ import { View, Text, StyleSheet } from "react-native";
 import React, { useState } from "react";
 import { Avatar, List, Card, Button } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
-import DialogEdit from "../components/DialogEdit/DialogEdit";
+import DialogEdit from "../../components/DialogEdit/DialogEdit";
 import * as Animatable from "react-native-animatable";
 
 export default function profile() {
