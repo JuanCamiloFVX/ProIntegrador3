@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, ScrollView, SafeAreaView } from 'react-native'
 import React from 'react'
-import ReportList from '../components/ReportList/ReportList'
+import ReportList from '../../components/ReportList/ReportList'
 import { Button, Title } from 'react-native-paper'
 import * as Animatable from 'react-native-animatable'
 

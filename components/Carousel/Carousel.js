@@ -1,10 +1,8 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import Carousel, { Pagination } from "react-native-snap-carousel";
 import CarouselCardItem, { SLIDER_WIDTH, ITEM_WIDTH } from "./CarouselCardItem";
 import data from "../data/data";
-import { Button } from "react-native-paper";
 import * as Animatable from 'react-native-animatable';
 
 const CarouselCards = () => {
