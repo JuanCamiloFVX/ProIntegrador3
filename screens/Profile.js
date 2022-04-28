@@ -12,7 +12,7 @@ export default function profile() {
     Name: "Lucas Grover Valdez",
     Email: "lucasGroverValdez@gmail.com",
     Phone: "3227885678",
-    Rol: 'Lame culos',
+    Rol: 'Administrador',
   });
 
   const Name = data.Name;
