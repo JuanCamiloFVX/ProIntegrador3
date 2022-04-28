@@ -3,7 +3,6 @@ import CarouselCards from "../../components/Carousel/Carousel";
 import { StyleSheet, View , Text} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Button } from "react-native-paper";
-import { head } from "lodash";
 
 const CarouselScreen = ({ navigation }) => {
   return (
@@ -13,7 +12,7 @@ const CarouselScreen = ({ navigation }) => {
       <CarouselCards/>
       <View style={{flex:1,justifyContent: 'flex-end' , top: 20, alignContent: "center"}}>
 
-      <Button color="#253659" mode= 'outlined' style={{ width:160, position:"absolute", left:115}} onPress={() => navigation.navigate("TabNavigation")}>
+      <Button color="#253659" mode= 'outlined' style={{ width:160, position:"absolute", left:115}} onPress={() => navigation.navigate("Tab")}>
           <Text style = {{color:'white'}} > Get Started </Text>
         </Button>
       </View>

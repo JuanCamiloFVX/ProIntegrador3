@@ -21,11 +21,13 @@ function ButtomTab() {
         name="Reports"
         component={Reports}
         options={{
+          
           tabBarLabel: 'Registros',
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="clipboard-text-multiple" color={color} size={26} />
           ),
         }}
+
       />
       <Tab.Screen
         name="Graphics"
