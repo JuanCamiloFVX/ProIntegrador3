@@ -18,8 +18,8 @@ const ReportList = () => {
   const [value, setValue] = React.useState("");
   const { loading, error, data } = useQuery(GET_POST);
 
-  if (loading) return <Text>Sus resportes se estan cargando</Text>;
-  if (error) return <Text>Ups Camilo se comio tu reporte</Text>;
+  if (loading) return <Text>Sus reportes se estan cargando</Text>;
+  if (error) return <Text>Error!!</Text>;
   console.log(value);
   return (
     <View styles={styles.container}>
@@ -30,14 +30,12 @@ const ReportList = () => {
         {data.reports.map((reports) => (
           <RadioButton.Item
             key={reports._id}
-            color="#03A696"
+            color="#253659"
             label={reports.title}
             value={reports._id}
           />
         ))}
       </RadioButton.Group>
-      <TouchableOpacity>
-      </TouchableOpacity>
     </View>
   );
 };
