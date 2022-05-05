@@ -8,11 +8,11 @@ const dataExample = {
 
 export const DataProvider = ({children})=>{
 
-    const [data,setData] = useState(dataExample);
+    const [dato,setDato] = useState(dataExample);
 
     return(
         <DataContext.Provider value={{
-            data,setData
+            dato,setDato
         }}>
             {children}
         </DataContext.Provider>
