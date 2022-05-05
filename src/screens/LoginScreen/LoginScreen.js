@@ -106,7 +106,7 @@ const LoginScreen = ({ navigation }) => {
     <View style={styles.container}>
       <StatusBar backgroundColor="#009387" barStyle="light-content" />
       <View style={styles.header}>
-        <Image style={styles.logo} source={require("../../assets/logo.png")} />
+        <Image style={styles.logo} source={require("../../assets/images/logo.png")} />
       </View>
       <Animatable.View
         animation="fadeInUpBig"
@@ -246,7 +246,7 @@ const LoginScreen = ({ navigation }) => {
           </TouchableOpacity>
           <Image
             style={styles.figure2}
-            source={require("../../assets/figure2.png")}
+            source={require("../../assets/images/figure2.png")}
           />
         </View>
       </Animatable.View>
