@@ -19,7 +19,7 @@ const ReportList = () => {
 
   const [value, setValue] = React.useState("");
   const { loading, error, data } = useQuery(GET_POST);
-  const {setData} = useContext(DataContext);
+  const {setDato} = useContext(DataContext);
   if (loading) return <Text>Sus reportes se estan cargando</Text>;
   if (error) return <Text>Error!!</Text>;
 
@@ -29,7 +29,7 @@ const ReportList = () => {
       <RadioButton.Group
         onValueChange={(value) => {
           setValue(value);
-          setData(value);
+          setDato(value);
         }}
         value={value}
       >
