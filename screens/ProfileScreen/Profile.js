@@ -71,6 +71,7 @@ export default function profile() {
             <Button
               style={Styles.ButtonEdit}
               onPress={() => navigation.navigate("EditProfile")}
+              color="#3C537E"
             >
               Editar Informacion
             </Button>
@@ -135,6 +136,7 @@ const Styles = StyleSheet.create({
     alignContent: "center",
     alignItems: "center",
     marginTop: "15%",
+    borderRadius:30,
   },
   ViewButtonEdit: {
     alignItems: "center",

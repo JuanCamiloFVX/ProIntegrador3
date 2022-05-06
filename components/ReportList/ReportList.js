@@ -18,8 +18,8 @@ const ReportList = () => {
   const [value, setValue] = React.useState("");
   const { loading, error, data } = useQuery(GET_POST);
 
-  if (loading) return <Text>Sus resportes se estan cargando</Text>;
-  if (error) return <Text>Ups Camilo se comio tu reporte</Text>;
+  if (loading) return <Text> Sus resportes se estan cargando </Text>;
+  if (error) return <Text> Ups Camilo se comio tu reporte </Text>;
   console.log(value);
   return (
     <View styles={styles.container}>
@@ -36,13 +36,13 @@ const ReportList = () => {
           />
         ))}
       </RadioButton.Group>
-      <TouchableOpacity>
-      </TouchableOpacity>
+      <TouchableOpacity></TouchableOpacity>
     </View>
   );
 };
 
 export default ReportList;
+
 const styles = StyleSheet.create({
   container: {},
 });
