@@ -4,7 +4,7 @@ import { Avatar, List, Button } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as Animatable from "react-native-animatable";
 import { useNavigation } from "@react-navigation/native";
-
+import AppBar from '../../components/AppBar/AppBar'
 export default function profile() {
 
   const navigation = useNavigation();
@@ -101,7 +101,7 @@ const Styles = StyleSheet.create({
   },
 
   SafeAreaViewPerfil: {
-    backgroundColor: "#04bf9d",
+    backgroundColor: "#DDDBDC",
     width: "100%",
     height: "100%",
     justifyContent: "center",

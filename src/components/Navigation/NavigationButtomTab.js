@@ -13,9 +13,9 @@ function ButtomTab() {
 
     < Tab.Navigator
       initialRouteName="Reports"
-      activeColor="#253659"
-      inactiveColor="#EDF5F2"
-      barStyle={{ backgroundColor: '#03A696' }}
+      activeColor="#EDF5F2"
+      inactiveColor="gray"
+      barStyle={{ backgroundColor: '#253659' }}
     >
       <Tab.Screen
         name="Reports"
