@@ -1,28 +1,34 @@
-import * as React from 'react';
-import { Appbar, Text } from 'react-native-paper';
-import { StyleSheet } from 'react-native';
+import * as React from "react";
+import { Appbar, Text } from "react-native-paper";
+import { StyleSheet, View} from "react-native";
 
-const AppBar = ({title}) => (
- <Appbar style={styles.bottom}>
-<Text style={styles.title}>{title}</Text>
+const AppBar = ({ title }) => (
+  <Appbar style={Styles.bottom}>
+    <View style={Styles.ViewTitle}>
+    <Text style={Styles.title}> {title} </Text>
+    </View>
   </Appbar>
- );
+);
 
-export default AppBar
+export default AppBar;
 
-const styles = StyleSheet.create({
+const Styles = StyleSheet.create({
   bottom: {
-    position: 'relative',
+    position: "relative",
     left: 0,
     right: 0,
-    top:0, 
-    backgroundColor:"#253659", 
+    top: 0,
+    backgroundColor: "#253659",
   },
-  title:{
-      color:"#fff", 
-      fontWeight:"bold",
-      fontSize:20, 
-      marginLeft:"30%"
-      
-  }
+  title: {
+    color: "#fff",
+    fontWeight: "bold",
+    fontSize: 20,
+    alignItems: "center",
+  },
+
+  ViewTitle:{
+    alignItems:"center",
+    width:"100%"
+  },
 });

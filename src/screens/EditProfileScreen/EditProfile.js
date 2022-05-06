@@ -7,10 +7,13 @@ import {
   Platform,
   TouchableWithoutFeedback,
   Keyboard,
+  StatusBar,
 } from "react-native";
 import { TextInput, Button } from "react-native-paper";
 import { gql, useQuery } from "@apollo/client";
 import { useNavigation } from "@react-navigation/native";
+import AppBar from '../../components/AppBar/AppBar';
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const GET_USER = gql`
   query {
@@ -49,19 +52,19 @@ export const EditProfile = () => {
   };
 
   return (
+
+    <SafeAreaView style={{flex:1}}>
+      <StatusBar backgroundColor="#253659" />
+        <AppBar title={"Editar Perfil"}/>
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : null}
       style={Styles.container}
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={Styles.ViewContainer}>
-
+        
           <View style={Styles.ViewTextInput}>
           
-            <View style={Styles.header}>
-            <Text style={Styles.Text}>Editar perfil</Text>
-            </View>
-            
 
             <TextInput
               mode="outlined"
@@ -116,6 +119,7 @@ export const EditProfile = () => {
         </View>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 };
 
@@ -189,4 +193,5 @@ const Styles = StyleSheet.create({
   ViewContainer: {
     flex: 1,
   },
+
 });
