@@ -5,6 +5,7 @@ import { EditProfile } from "../../screens/EditProfileScreen/EditProfile";
 import { enableScreens } from "react-native-screens";
 import { createNativeStackNavigator } from "react-native-screens/native-stack";
 import NavigationButtomTab from "./NavigationButtomTab";
+import { CreateReport } from "../../screens/CreateReportScreen/CreateReportScreen";
 
 enableScreens();
 const Stack = createNativeStackNavigator();
@@ -19,6 +20,8 @@ const NavigationStack = () => {
       <Stack.Screen name="CarouselScreen" component={CarouselScreen} />
       <Stack.Screen name="Tab" component={NavigationButtomTab} />
       <Stack.Screen name="EditProfile" component={EditProfile} />
+      <Stack.Screen name="CreateReport" component={CreateReport} />
+      
     </Stack.Navigator>
   );
 };

@@ -21,7 +21,7 @@ let ID = "624b7105672e125fd1b7f93f";
     `;
 
 export default function profile() {
-  
+
   const navigation = useNavigation();
 
   const {loading,error,data} = useQuery(GET_USER);
@@ -41,7 +41,7 @@ export default function profile() {
                 uri: "https://us.123rf.com/450wm/kritchanut/kritchanut1406/kritchanut140600114/29213224-hombre-foto-de-perfil-silueta-avatar.jpg?ver=6",
               }}
             />
-
+            
             <Text style={Styles.TextName}>{data.getUserById.name}</Text>
             <Text style={Styles.TextRol}>{data.getUserById.rol_id}</Text>
           </View>

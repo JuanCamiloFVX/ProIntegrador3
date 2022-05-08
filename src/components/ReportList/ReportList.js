@@ -13,7 +13,7 @@ const GET_POST = gql`
       url
     }
   }
-`;
+  `;
 
 const ReportList = () => {
 
@@ -23,11 +23,6 @@ const ReportList = () => {
   if (loading) return <Text>Sus reportes se estan cargando</Text>;
   if (error) return <Text>Error!!</Text>;
 
-<<<<<<< HEAD:components/ReportList/ReportList.js
-  if (loading) return <Text> Sus resportes se estan cargando </Text>;
-  if (error) return <Text> Ups Camilo se comio tu reporte </Text>;
-=======
->>>>>>> develop:src/components/ReportList/ReportList.js
   console.log(value);
   return (
     <View styles={styles.container}>
@@ -47,20 +42,13 @@ const ReportList = () => {
           />
         ))}
       </RadioButton.Group>
-<<<<<<< HEAD:components/ReportList/ReportList.js
-      <TouchableOpacity></TouchableOpacity>
-=======
->>>>>>> develop:src/components/ReportList/ReportList.js
     </View>
   );
 };
 export default ReportList;
 
-<<<<<<< HEAD:components/ReportList/ReportList.js
-=======
 
 
->>>>>>> develop:src/components/ReportList/ReportList.js
 const styles = StyleSheet.create({
   container: {},
 });

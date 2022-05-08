@@ -17,7 +17,6 @@ import AppBar from "../../components/AppBar/AppBar";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export const EditProfile = () => {
-
   let ID = "624b7105672e125fd1b7f93f";
   const GET_USER_ID = gql`
     query{
@@ -33,7 +32,7 @@ export const EditProfile = () => {
 
   const { loading, error, data } = useQuery(GET_USER_ID);
   if (loading) return <Text>La informacion del usuario esta cargando</Text>;
-  if (error) return <Text>Error!!+${ID}</Text>
+  if (error) return <Text>Error!!+${ID}</Text>;
 
   const [dataUser, setDataUser] = useState({
     UserName: data.getUserById.user_name,
@@ -100,24 +99,24 @@ export const EditProfile = () => {
                 outlineColor="#03A696"
                 activeOutlineColor="#9E7B2C"
               />
+              <View style={Styles.ViewButtom}>
+                <Button
+                  onPress={() => navigation.goBack()}
+                  color="#FFF"
+                  style={Styles.Buttom}
+                >
+                  Editar
+                </Button>
+                <Button
+                  onPress={() => navigation.goBack()}
+                  color="#FFF"
+                  style={Styles.Buttom}
+                >
+                  Cancelar
+                </Button>
+              </View>
             </View>
           </KeyboardAvoidingView>
-          <View style={Styles.ViewButtom}>
-            <Button
-              onPress={() => navigation.goBack()}
-              color="#FFF"
-              style={Styles.Buttom}
-            >
-              Editar
-            </Button>
-            <Button
-              onPress={() => navigation.goBack()}
-              color="#FFF"
-              style={Styles.Buttom}
-            >
-              Cancelar
-            </Button>
-          </View>
         </View>
       </TouchableWithoutFeedback>
     </SafeAreaView>
@@ -144,6 +143,7 @@ const Styles = StyleSheet.create({
     backgroundColor: "#03A696",
     borderRadius: 30,
     width: 150,
+    height:"12%",
   },
 
   Text: {
@@ -157,15 +157,17 @@ const Styles = StyleSheet.create({
     marginBottom: "5%",
   },
   ViewButtom: {
-    display: "flex",
+    display:"flex",
     width: "100%",
-    justifyContent: "space-between",
+    justifyContent: "center",
     flexDirection: "row",
     paddingLeft: "9%",
     paddingRight: "9%",
+    paddingTop:"36%",
     marginTop: 10,
     marginBottom: "15%",
     backgroundColor: "#DDDBDC",
+    height:"100%"
   },
 
   ViewTextInput: {
