@@ -3,22 +3,13 @@ import { View, StyleSheet, Text } from "react-native";
 import { RadioButton } from "react-native-paper";
 import { gql, useQuery } from "@apollo/client";
 import {DataContext} from '../../context/DataContext';
+import { GET_REPORTS } from "../../services/queries/Queries";
 
-const GET_POST = gql`
-  query {
-    reports {
-      _id
-      title
-      description
-      url
-    }
-  }
-`;
 
 const ReportList = () => {
 
   const [value, setValue] = React.useState("");
-  const { loading, error, data } = useQuery(GET_POST);
+  const { loading, error, data } = useQuery(GET_REPORTS);
   const {setDato} = useContext(DataContext);
   if (loading) return <Text>Sus reportes se estan cargando</Text>;
   if (error) return <Text>Error!!</Text>;
