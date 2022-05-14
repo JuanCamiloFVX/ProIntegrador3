@@ -14,30 +14,39 @@ import { useNavigation } from "@react-navigation/native";
 import AppBar from "../../components/AppBar/AppBar";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+const SET_REPORT = gql`
+  mutation addreport($title: String!, $description: String!, $url: String!) {
+    createReport(
+      report: { title: $title, description: $description, url: $url }
+    ) {
+      title
+      description
+      url
+    }
+  }
+`;
+
 export const CreateReport = () => {
 
   const navigation = useNavigation();
 
-  const [dataReport, setDataReport] = useState({
-    Title: "",
-    Descripcion: "",
-    Url: "",
-  });
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [url, setUrl] = useState("");
 
+  const [createRe] = useMutation(SET_REPORT);
 
-  const Titleform = (text) => {
-    setDataReport({ ...dataReport, Title: text });
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    createRe({ variables: { title, description, url } });
+
+    setTitle("");
+    setDescription("");
+    setUrl("");
   };
 
-  const Descripcionform = (text) => {
-    setDataReport({ ...dataReport, Descripcion: text });
-  };
-
-  const Urlform = (text) => {
-    setDataReport({ ...dataReport, Url: text });
-  };
   console.log({ data });
-
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <StatusBar backgroundColor="#253659" />
@@ -57,8 +66,8 @@ export const CreateReport = () => {
               mode="outlined"
               style={Styles.TextInput}
               label="Titulo"
-              value={dataReport.Title}
-              onChangeText={(text) => Titleform(text)}
+              value={title}
+              onChangeText={(text) => setTitle(text)}
               outlineColor="#03A696"
               activeOutlineColor="#9E7B2C"
             />
@@ -67,8 +76,8 @@ export const CreateReport = () => {
               mode="outlined"
               style={Styles.TextInput}
               label="Descripcion"
-              value={dataReport.Descripcion}
-              onChangeText={(text) => Descripcionform(text)}
+              value={description}
+              onChangeText={(text) => setDescription(text)}
               outlineColor="#03A696"
               activeOutlineColor="#9E7B2C"
             />
@@ -77,16 +86,16 @@ export const CreateReport = () => {
               mode="outlined"
               style={Styles.TextInput}
               label="Url"
-              value={dataReport.Url}
-              onChangeText={(text) => Urlform(text)}
+              value={url}
+              onChangeText={(text) => setUrl(text)}
               outlineColor="#03A696"
               activeOutlineColor="#9E7B2C"
             />
             <View style={Styles.ViewButtom}>
-              <Button
-                onPress={() => navigation.goBack()}
-                color="#FFF"
-                style={Styles.Buttom}
+              <Button 
+              onPress={handleSubmit}
+              color="#FFF"
+              style={Styles.Buttom}
               >
                 Crear
               </Button>
@@ -170,3 +179,4 @@ const Styles = StyleSheet.create({
     borderBottomEndRadius: 90,
   },
 });
+
