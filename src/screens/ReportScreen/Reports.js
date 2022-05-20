@@ -4,8 +4,12 @@ import ReportList from '../../components/ReportList/ReportList'
 import { Button, Title,  IconButton } from 'react-native-paper'
 import * as Animatable from 'react-native-animatable'
 import AppBar from '../../components/AppBar/AppBar'
+import { useNavigation } from '@react-navigation/native'
 
-export default function Page1({ navigation }) {
+
+export default function Page1() {
+
+  const navigation = useNavigation();
   return (
     <SafeAreaView style={styles.safe}>
        <StatusBar backgroundColor="#253659" />
@@ -28,7 +32,7 @@ export default function Page1({ navigation }) {
             icon="upload"
             mode="contained"
             color="#9E7B2C"
-            onPress={() => console.log('Pressed')}
+            onPress={() => navigation.navigate("CreateReport")}
           >
             Nuevo Reporte
           </Button>
@@ -37,7 +41,7 @@ export default function Page1({ navigation }) {
             icon="signal-cellular-3"
             mode="contained"
             color="#9E7B2C"
-            onPress={() => console.log('Pressed')}
+            onPress={() => navigation.navigate("Graphics")}
           >
             Mostrar Grafica
           </Button>
