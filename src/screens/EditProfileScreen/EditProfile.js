@@ -134,6 +134,10 @@ export const EditProfile = () => {
                   Cancelar
                 </Button>
               </View>
+              <Image
+              style={Styles.figure2}
+              source={require("../../assets/images/figure2.png")}
+            />
             </View>
           </KeyboardAvoidingView>
         </View>
@@ -159,10 +163,10 @@ const Styles = StyleSheet.create({
     marginStart: 6,
     elevation: 15,
     shadowColor: "#253659",
-    backgroundColor: "#03A696",
+    backgroundColor: "#253659",
     borderRadius: 30,
     width: 150,
-    height: "12%",
+    height: 40,
   },
 
   Text: {
@@ -174,6 +178,8 @@ const Styles = StyleSheet.create({
   Image: {
     marginTop: "5%",
     marginBottom: "5%",
+    height: 100,
+    width: 200,
   },
   ViewButtom: {
     display: "flex",
@@ -182,11 +188,9 @@ const Styles = StyleSheet.create({
     flexDirection: "row",
     paddingLeft: "9%",
     paddingRight: "9%",
-    paddingTop: "36%",
-    marginTop: 10,
+    marginTop: 50,
     marginBottom: "15%",
     backgroundColor: "#DDDBDC",
-    height: "100%",
   },
 
   ViewTextInput: {
@@ -202,8 +206,15 @@ const Styles = StyleSheet.create({
 
   ViewImage: {
     alignItems: "center",
-    backgroundColor: "#03A696",
-    borderBottomStartRadius: 90,
-    borderBottomEndRadius: 90,
+    backgroundColor: "#253659",
+    borderBottomStartRadius: 170,
+    borderBottomEndRadius: 170,
+  },
+  figure2: {
+    position: "relative",
+    left: -20,
+    width: 450,
+    height: 200,
+    bottom: -10,
   },
 });
