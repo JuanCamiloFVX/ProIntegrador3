@@ -6,19 +6,7 @@ import * as Animatable from "react-native-animatable";
 import { useNavigation } from "@react-navigation/native";
 import AppBar from '../../components/AppBar/AppBar';
 import { gql, useQuery } from "@apollo/client";
-
-let ID = "624b7105672e125fd1b7f93f";
-  const GET_USER = gql`
-    query{
-      getUserById(_id:"${ID}"){
-        user_name
-        email
-        phoneNumber
-        name
-        rol_id
-      }
-    }
-    `;
+import {GET_USER} from "../../core/queries/Queries";
 
 export default function profile() {
 

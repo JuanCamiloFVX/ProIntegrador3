@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
 import {
   View,
   Text,
@@ -11,45 +11,64 @@ import {
   Image,
 } from "react-native";
 import { TextInput, Button } from "react-native-paper";
-import { gql, useQuery } from "@apollo/client";
+import { gql, useMutation, useQuery } from "@apollo/client";
 import { useNavigation } from "@react-navigation/native";
 import AppBar from "../../components/AppBar/AppBar";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { GET_USER_ID, GET_USER } from "../../core/queries/Queries";
+
+
+const IDD = "624b7105672e125fd1b7f93f";
+
+export const SET_USER = gql`
+
+  mutation update(
+    $user_name: String!
+    $email: String!
+    $phoneNumber: String!
+    
+  ) {
+    updateUser(
+      user: {
+        _id: "${IDD}"
+        user_name: $user_name
+        email: $email
+        phoneNumber: $phoneNumber
+      }
+    ) {
+      _id
+      user_name
+      email
+      phoneNumber
+      name
+      rol_id
+      
+    }
+  }
+`;
 
 export const EditProfile = () => {
-  let ID = "624b7105672e125fd1b7f93f";
-  const GET_USER_ID = gql`
-    query{
-      getUserById(_id:"${ID}"){
-        user_name
-        email
-        phoneNumber
-      }
-    }
-    `;
-
   const navigation = useNavigation();
 
   const { loading, error, data } = useQuery(GET_USER_ID);
   if (loading) return <Text>La informacion del usuario esta cargando</Text>;
   if (error) return <Text>Error!!+${ID}</Text>;
 
-  const [dataUser, setDataUser] = useState({
-    UserName: data.getUserById.user_name,
-    Email: data.getUserById.email,
-    Phone: data.getUserById.phoneNumber,
-  });
+  const [updateUs] = useMutation(SET_USER);
 
-  const EditUserName = (text) => {
-    setDataUser({ ...dataUser, UserName: text });
-  };
+  const [User_name, setUsername] = useState(data.getUserById.user_name);
+  const [Email, setEmail] = useState(data.getUserById.email);
+  const [PhoneNumber, setPhoneNumber] = useState(data.getUserById.phoneNumber);
 
-  const EditEmail = (text) => {
-    setDataUser({ ...dataUser, Email: text });
-  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-  const EditPhone = (text) => {
-    setDataUser({ ...dataUser, Phone: text });
+      updateUs({ 
+        variables: {User_name, Email, PhoneNumber}
+      })
+    
+      navigation.navigate("Profile")
+
   };
 
   return (
@@ -74,8 +93,8 @@ export const EditProfile = () => {
                 mode="outlined"
                 style={Styles.TextInput}
                 label="UserName"
-                value={dataUser.UserName}
-                onChangeText={(text) => EditUserName(text)}
+                value={User_name}
+                onChangeText={(text) => setUsername(text)}
                 outlineColor="#03A696"
                 activeOutlineColor="#9E7B2C"
               />
@@ -84,8 +103,8 @@ export const EditProfile = () => {
                 mode="outlined"
                 style={Styles.TextInput}
                 label="Email"
-                value={dataUser.Email}
-                onChangeText={(text) => EditEmail(text)}
+                value={Email}
+                onChangeText={(text) => setEmail(text)}
                 outlineColor="#03A696"
                 activeOutlineColor="#9E7B2C"
               />
@@ -94,14 +113,14 @@ export const EditProfile = () => {
                 mode="outlined"
                 style={Styles.TextInput}
                 label="Phone"
-                value={dataUser.Phone}
-                onChangeText={(text) => EditPhone(text)}
+                value={PhoneNumber}
+                onChangeText={(text) => setPhoneNumber(text)}
                 outlineColor="#03A696"
                 activeOutlineColor="#9E7B2C"
               />
               <View style={Styles.ViewButtom}>
                 <Button
-                  onPress={() => navigation.goBack()}
+                  onPress={handleSubmit}
                   color="#FFF"
                   style={Styles.Buttom}
                 >
@@ -143,7 +162,7 @@ const Styles = StyleSheet.create({
     backgroundColor: "#03A696",
     borderRadius: 30,
     width: 150,
-    height:"12%",
+    height: "12%",
   },
 
   Text: {
@@ -157,17 +176,17 @@ const Styles = StyleSheet.create({
     marginBottom: "5%",
   },
   ViewButtom: {
-    display:"flex",
+    display: "flex",
     width: "100%",
     justifyContent: "center",
     flexDirection: "row",
     paddingLeft: "9%",
     paddingRight: "9%",
-    paddingTop:"36%",
+    paddingTop: "36%",
     marginTop: 10,
     marginBottom: "15%",
     backgroundColor: "#DDDBDC",
-    height:"100%"
+    height: "100%",
   },
 
   ViewTextInput: {

@@ -9,10 +9,11 @@ import {
   Image,
 } from "react-native";
 import { TextInput, Button } from "react-native-paper";
-import { gql, useMutation } from "@apollo/client";
+import { gql,useMutation } from "@apollo/client";
 import { useNavigation } from "@react-navigation/native";
 import AppBar from "../../components/AppBar/AppBar";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { GET_REPORTS} from "../../core/queries/Queries";
 
 const SET_REPORT = gql`
   mutation addreport($title: String!, $description: String!, $url: String!) {
@@ -26,27 +27,30 @@ const SET_REPORT = gql`
   }
 `;
 
+
 export const CreateReport = () => {
-
+  
   const navigation = useNavigation();
-
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [url, setUrl] = useState("");
 
-  const [createRe] = useMutation(SET_REPORT);
+  const [createRe] = useMutation(SET_REPORT,{onError:(error)=> alert(error.message)});
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    createRe({ variables: { title, description, url } });
+    createRe({ variables: { title, description, url }, refetchQueries:[{query:GET_REPORTS}] });
+
+    
 
     setTitle("");
     setDescription("");
     setUrl("");
+
+    navigation.navigate('Reports')
   };
 
-  console.log({ data });
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <StatusBar backgroundColor="#253659" />

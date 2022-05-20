@@ -3,21 +3,7 @@ import { View, StyleSheet, Text } from "react-native";
 import { RadioButton } from "react-native-paper";
 import { gql, useQuery } from "@apollo/client";
 import {DataContext} from '../../context/DataContext';
-import { GET_REPORTS } from "../../services/queries/Queries";
-
-<<<<<<< HEAD
-const GET_POST = gql`
-  query {
-    reports {
-      _id
-      title
-      description
-      url
-    }
-  }
-  `;
-=======
->>>>>>> develop
+import { GET_REPORTS } from "../../core/queries/Queries";
 
 const ReportList = () => {
 
