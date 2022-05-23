@@ -8,12 +8,14 @@ import {
   StatusBar,
   Image,
 } from "react-native";
+
+import * as Animatable from "react-native-animatable";
 import { TextInput, Button } from "react-native-paper";
-import { gql,useMutation } from "@apollo/client";
+import { gql, useMutation } from "@apollo/client";
 import { useNavigation } from "@react-navigation/native";
 import AppBar from "../../components/AppBar/AppBar";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { GET_REPORTS} from "../../core/queries/Queries";
+import { GET_REPORTS } from "../../core/queries/Queries";
 
 const SET_REPORT = gql`
   mutation addreport($title: String!, $description: String!, $url: String!) {
@@ -27,28 +29,29 @@ const SET_REPORT = gql`
   }
 `;
 
-
 export const CreateReport = () => {
-  
   const navigation = useNavigation();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [url, setUrl] = useState("");
 
-  const [createRe] = useMutation(SET_REPORT,{onError:(error)=> alert(error.message)});
+  const [createRe] = useMutation(SET_REPORT, {
+    onError: (error) => alert(error.message),
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    createRe({ variables: { title, description, url }, refetchQueries:[{query:GET_REPORTS}] });
-
-    
+    createRe({
+      variables: { title, description, url },
+      refetchQueries: [{ query: GET_REPORTS }],
+    });
 
     setTitle("");
     setDescription("");
     setUrl("");
 
-    navigation.navigate('Reports')
+    navigation.navigate("Reports");
   };
 
   return (
@@ -64,7 +67,6 @@ export const CreateReport = () => {
               source={require("../../assets/images/logo.png")}
             />
           </View>
-
           <View style={Styles.ViewTextInput}>
             <TextInput
               mode="outlined"
@@ -75,7 +77,6 @@ export const CreateReport = () => {
               outlineColor="#03A696"
               activeOutlineColor="#9E7B2C"
             />
-
             <TextInput
               mode="outlined"
               style={Styles.TextInput}
@@ -95,12 +96,11 @@ export const CreateReport = () => {
               outlineColor="#03A696"
               activeOutlineColor="#9E7B2C"
             />
+            <Text style={{ color: "#009387", marginTop: 15 }}>
+             Recuerda Colocar Un Url !
+            </Text>
             <View style={Styles.ViewButtom}>
-              <Button 
-              onPress={handleSubmit}
-              color="#FFF"
-              style={Styles.Buttom}
-              >
+              <Button onPress={handleSubmit} color="#FFF" style={Styles.Buttom}>
                 Crear
               </Button>
               <Button
@@ -111,6 +111,10 @@ export const CreateReport = () => {
                 Cancelar
               </Button>
             </View>
+            <Image
+              style={Styles.figure2}
+              source={require("../../assets/images/figure2.png")}
+            />
           </View>
         </View>
       </TouchableWithoutFeedback>
@@ -135,10 +139,10 @@ const Styles = StyleSheet.create({
     marginStart: 6,
     elevation: 15,
     shadowColor: "#253659",
-    backgroundColor: "#03A696",
+    backgroundColor: "#253659",
     borderRadius: 30,
     width: 150,
-    height: "12%",
+    height: 40,
   },
 
   Text: {
@@ -150,6 +154,8 @@ const Styles = StyleSheet.create({
   Image: {
     marginTop: "5%",
     marginBottom: "5%",
+    height: 100,
+    width: 200,
   },
   ViewButtom: {
     display: "flex",
@@ -158,11 +164,9 @@ const Styles = StyleSheet.create({
     flexDirection: "row",
     paddingLeft: "9%",
     paddingRight: "9%",
-    paddingTop: "36%",
-    marginTop: 10,
+    marginTop: 50,
     marginBottom: "15%",
     backgroundColor: "#DDDBDC",
-    height: "100%",
   },
 
   ViewTextInput: {
@@ -178,9 +182,15 @@ const Styles = StyleSheet.create({
 
   ViewImage: {
     alignItems: "center",
-    backgroundColor: "#03A696",
-    borderBottomStartRadius: 90,
-    borderBottomEndRadius: 90,
+    backgroundColor: "#253659",
+    borderBottomStartRadius: 170,
+    borderBottomEndRadius: 170,
+  },
+  figure2: {
+    position: "relative",
+    left: -20,
+    width: 450,
+    height: 200,
+    bottom: 0,
   },
 });
-
