@@ -12,13 +12,24 @@ import {
   StatusBar,
   Alert,
 } from "react-native";
-
+import { gql, useMutation } from '@apollo/client';
 import * as Animatable from "react-native-animatable";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Feather from "react-native-vector-icons/Feather";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const LoginScreen = ({ navigation }) => {
-  const [data, setData] = React.useState({
+
+  const AuthUser = gql`
+    mutation authUser($userName: String!, $password: String!) {
+      authUser(user: { user_name: $userName, password: $password }) {
+        token
+  
+      }
+    }
+  `;
+  const [authUser, { data,loading, error, }] = useMutation(AuthUser);
+  const [info, setInfo] = React.useState({
     username: "",
     password: "",
     check_textInputChange: false,
@@ -29,15 +40,15 @@ const LoginScreen = ({ navigation }) => {
 
   const textInputChange = (val) => {
     if (val.trim().length >= 4) {
-      setData({
-        ...data,
+      setInfo({
+        ...info,
         username: val,
         check_textInputChange: true,
         isValidUser: true,
       });
     } else {
-      setData({
-        ...data,
+      setInfo({
+        ...info,
         username: val,
         check_textInputChange: false,
         isValidUser: false,
@@ -46,47 +57,47 @@ const LoginScreen = ({ navigation }) => {
   };
 
   const updateSecureTextEntry = () => {
-    setData({
-      ...data,
-      secureTextEntry: !data.secureTextEntry,
+    setInfo({
+      ...info,
+      secureTextEntry: !info.secureTextEntry,
     });
   };
 
   const handleValidUser = (val) => {
     if (val.trim().length >= 4) {
-      setData({
-        ...data,
+      setInfo({
+        ...info,
         isValidUser: true,
       });
     } else {
-      setData({
-        ...data,
+      setInfo({
+        ...info,
         isValidUser: false,
       });
     }
   };
   const handlePasswordChange = (val) => {
     if (val.trim().length >= 8) {
-      setData({
-        ...data,
+      setInfo({
+        ...info,
         password: val,
         isValidPassword: true,
       });
     } else {
-      setData({
-        ...data,
+      setInfo({
+        ...info,
         password: val,
         isValidPassword: false,
       });
     }
   };
-  const loginHandle = (userName, password) => {
+  const loginHandle = async (userName, password) => {
 
     const foundUser = Users.filter( item => {
         return userName == item.username && password == item.password;
     } );
 
-    if ( data.username.length == 0 || data.password.length == 0 ) {
+    if ( info.username.length == 0 || info.password.length == 0 ) {
         Alert.alert('Wrong Input!', 'Usuario o Contraseña no debe estar vacio.', [
             {text: 'Okay'}
         ]);
@@ -99,6 +110,14 @@ const LoginScreen = ({ navigation }) => {
         ]);
         return;
     }
+    try {
+      authUser({ variables: { userName, password } });
+      console.log(data.authUser.token);
+      await AsyncStorage.setItem('@storage_token', data.authUser.token);
+    } catch (e) {
+      console.log('Error '+e);
+    }
+    
     signIn(foundUser);
 }
 
@@ -142,13 +161,13 @@ const LoginScreen = ({ navigation }) => {
             onChangeText={(val) => textInputChange(val)}
             onEndEditing={(e) => handleValidUser(e.nativeEvent.text)}
           />
-          {data.check_textInputChange ? (
+          {info.check_textInputChange ? (
             <Animatable.View animation="bounceIn">
               <Feather name="check-circle" color="green" size={20} />
             </Animatable.View>
           ) : null}
         </View>
-        {data.isValidUser ? null : (
+        {info.isValidUser ? null : (
           <Animatable.View animation="fadeInLeft" duration={500}>
             <Text style={styles.errorMsg}>
               Su Usuario debe tener minimo 4 caracteres
@@ -172,7 +191,7 @@ const LoginScreen = ({ navigation }) => {
           <TextInput
             placeholder="Tu Contraseña"
             placeholderTextColor="#666666"
-            secureTextEntry={data.secureTextEntry ? true : false}
+            secureTextEntry={info.secureTextEntry ? true : false}
             style={[
               styles.textInput,
               {
@@ -183,14 +202,14 @@ const LoginScreen = ({ navigation }) => {
             onChangeText={(val) => handlePasswordChange(val)}
           />
           <TouchableOpacity onPress={updateSecureTextEntry}>
-            {data.secureTextEntry ? (
+            {info.secureTextEntry ? (
               <Feather name="eye-off" color="grey" size={20} />
             ) : (
               <Feather name="eye" color="grey" size={20} />
             )}
           </TouchableOpacity>
         </View>
-        {data.isValidPassword ? null : (
+        {info.isValidPassword ? null : (
           <Animatable.View animation="fadeInLeft" duration={500}>
             <Text style={styles.errorMsg}>
               Su contraseña debe tener minimo 8 caracteres
@@ -207,7 +226,7 @@ const LoginScreen = ({ navigation }) => {
           <TouchableOpacity
             style={styles.signIn}
             onPress={() => {
-              loginHandle(data.username, data.password);
+              loginHandle(info.username, info.password);
             }}
           >
             <Text
