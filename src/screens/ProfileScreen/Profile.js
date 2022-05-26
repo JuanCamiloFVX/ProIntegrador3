@@ -4,27 +4,21 @@ import { Avatar, List, Button } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as Animatable from "react-native-animatable";
 import { useNavigation } from "@react-navigation/native";
-import AppBar from '../../components/AppBar/AppBar'
+import AppBar from '../../components/AppBar/AppBar';
+import { gql, useQuery } from "@apollo/client";
+import {GET_USER} from "../../core/queries/Queries";
+
 export default function profile() {
 
   const navigation = useNavigation();
 
-  const [data, setData] = useState({
-    UserName: "NSKAELA",
-    Name: "Lucas Grover Valdez",
-    Email: "lucasGroverValdez@gmail.com",
-    Phone: "3227885678",
-    Rol: "Administrador",
-  });
-
-  const Name = data.Name;
-  const UserName = data.UserName;
-  const Email = data.Email;
-  const Phone = data.Phone;
-  const Rol = data.Rol;
-
+  const {loading,error,data} = useQuery(GET_USER);
+  if (loading) return <Text>La informacion del usuario esta cargando</Text>;
+  if (error) return <Text>Error!!+${ID}</Text>
+  
   return (
     <SafeAreaView style={Styles.SafeAreaViewPerfil}>
+      <AppBar title={"Perfil"}/>
       <View style={Styles.ViewProfile}>
         <Animatable.View animation="fadeInLeft">
           <View style={Styles.ViewImage}>
@@ -35,9 +29,9 @@ export default function profile() {
                 uri: "https://us.123rf.com/450wm/kritchanut/kritchanut1406/kritchanut140600114/29213224-hombre-foto-de-perfil-silueta-avatar.jpg?ver=6",
               }}
             />
-
-            <Text style={Styles.TextName}>{Name}</Text>
-            <Text style={Styles.TextRol}>{Rol}</Text>
+            
+            <Text style={Styles.TextName}>{data.getUserById.name}</Text>
+            <Text style={Styles.TextRol}>{data.getUserById.rol_id}</Text>
           </View>
         </Animatable.View>
 
@@ -45,7 +39,7 @@ export default function profile() {
           <Animatable.View animation="fadeInLeft">
             <List.Item
               title="UserName"
-              description={UserName}
+              description={data.getUserById.user_name}
               left={(props) => (
                 <List.Icon {...props} icon="account-circle" color="#3C537E" />
               )}
@@ -53,7 +47,7 @@ export default function profile() {
 
             <List.Item
               title="Email"
-              description={Email}
+              description={data.getUserById.email}
               left={(props) => (
                 <List.Icon {...props} color="#3C537E" icon="email" />
               )}
@@ -61,7 +55,7 @@ export default function profile() {
 
             <List.Item
               title="Phone"
-              description={Phone}
+              description={data.getUserById.phoneNumber}
               left={(props) => (
                 <List.Icon {...props} icon="phone" color="#3C537E" />
               )}
@@ -71,6 +65,7 @@ export default function profile() {
             <Button
               style={Styles.ButtonEdit}
               onPress={() => navigation.navigate("EditProfile")}
+              color="#3C537E"
             >
               Editar Informacion
             </Button>
@@ -90,19 +85,20 @@ const Styles = StyleSheet.create({
     justifyContent: "flex-end",
     height: "90%",
     width: "90%",
+    marginTop:"3%",
+    marginBottom:"3%",
   },
   ViewInformation: {
     width: "100%",
     height: 350,
     borderBottomRightRadius: 100,
     backgroundColor: "#FFF",
-    marginBottom: "0%",
+    paddingTop:"5%",
   },
 
   SafeAreaViewPerfil: {
+    flex:1,
     backgroundColor: "#DDDBDC",
-    width: "100%",
-    height: "100%",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -135,6 +131,7 @@ const Styles = StyleSheet.create({
     alignContent: "center",
     alignItems: "center",
     marginTop: "15%",
+    borderRadius:30,
   },
   ViewButtonEdit: {
     alignItems: "center",

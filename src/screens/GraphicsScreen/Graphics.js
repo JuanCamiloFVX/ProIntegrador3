@@ -21,7 +21,7 @@ export default function Page2() {
   const { loading, error, data } = useQuery(GET_BY_ID);
   if (loading) return <Text>Su reporte esta cargando</Text>;
   if (error) return <Text>Error!!+${dato}</Text>;
-console.log(data.getReportById.url);
+  console.log(data.getReportById.url);
   return (
     <View style={{ flex: 1 }}>
       <AppBar title={"Gestion Graficas"} />
