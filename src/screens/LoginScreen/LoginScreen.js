@@ -20,15 +20,16 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const LoginScreen = ({ navigation }) => {
 
-  const AuthUser = gql`
-    mutation authUser($userName: String!, $password: String!) {
-      authUser(user: { user_name: $userName, password: $password }) {
+  const Auth_User = gql`
+    mutation AuthUser($user_name: String!, $password: String!) {
+      authUser(
+        user: { user_name: $userName, password: $password }
+        ) {
         token
-  
       }
     }
   `;
-  const [authUser, { data,loading, error, }] = useMutation(AuthUser);
+  
   const [info, setInfo] = React.useState({
     username: "",
     password: "",
@@ -37,6 +38,9 @@ const LoginScreen = ({ navigation }) => {
     isValidUser: true,
     isValidPassword: true,
   });
+
+  
+const [authUser,{data:dataU}] = useMutation(Auth_User);
 
   const textInputChange = (val) => {
     if (val.trim().length >= 4) {
@@ -76,6 +80,7 @@ const LoginScreen = ({ navigation }) => {
       });
     }
   };
+  
   const handlePasswordChange = (val) => {
     if (val.trim().length >= 8) {
       setInfo({
@@ -91,34 +96,26 @@ const LoginScreen = ({ navigation }) => {
       });
     }
   };
+  
   const loginHandle = async (userName, password) => {
-
-    const foundUser = Users.filter( item => {
-        return userName == item.username && password == item.password;
-    } );
-
-    if ( info.username.length == 0 || info.password.length == 0 ) {
+      if ( info.username.length == 0 || info.password.length == 0 ) {
         Alert.alert('Wrong Input!', 'Usuario o Contraseña no debe estar vacio.', [
             {text: 'Okay'}
         ]);
-        return;
     }
+}
 
-    if ( foundUser.length == 0 ) {
-        Alert.alert('Invalid User!', 'Usuario o Conraeña incorrectos.', [
-            {text: 'Okay'}
-        ]);
-        return;
-    }
-    try {
-      authUser({ variables: { userName, password } });
-      console.log(data.authUser.token);
-      await AsyncStorage.setItem('@storage_token', data.authUser.token);
-    } catch (e) {
-      console.log('Error '+e);
-    }
-    
-    signIn(foundUser);
+const LoginFuck = async (userName, password) => {
+  try {
+    userName=info.username;
+    password=info.password;
+    authUser({ variables: userName, password });
+    console.log(dataU);
+    await AsyncStorage.setItem('@storage_token', dataU);
+    navigation.navigate("CarouselScreen");
+  } catch (e) {
+    console.log('Error '+e);
+  }
 }
 
   return (
@@ -224,24 +221,6 @@ const LoginScreen = ({ navigation }) => {
         </TouchableOpacity>
         <View style={styles.button}>
           <TouchableOpacity
-            style={styles.signIn}
-            onPress={() => {
-              loginHandle(info.username, info.password);
-            }}
-          >
-            <Text
-              style={[
-                styles.textSign,
-                {
-                  color: "#fff",
-                },
-              ]}
-            >
-              Sign In
-            </Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
             style={[
               styles.signIn,
               {
@@ -250,7 +229,12 @@ const LoginScreen = ({ navigation }) => {
                 marginTop: 15,
               },
             ]}
-            onPress={() => navigation.navigate("CarouselScreen")}
+            onPress={
+              () => {
+                loginHandle(info.username, info.password);
+                LoginFuck(info.username, info.password);
+              }
+            }
           >
             <Text
               style={[
