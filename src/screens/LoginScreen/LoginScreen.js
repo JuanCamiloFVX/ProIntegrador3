@@ -302,7 +302,7 @@ const styles = StyleSheet.create({
     left: 50,
   },
   figure2: {
-    top: 10,
+    top: 50,
     left: -25,
     width: 450,
     height: 200,
