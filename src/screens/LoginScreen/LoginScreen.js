@@ -81,25 +81,16 @@ const LoginScreen = ({ navigation }) => {
     }
   };
   const loginHandle = (userName, password) => {
-
-    const foundUser = Users.filter( item => {
-        return userName == item.username && password == item.password;
-    } );
-
-    if ( data.username.length == 0 || data.password.length == 0 ) {
+    userName ==  data.username;
+    password ==  data.password;
+  if ( userName.length == 0 || password.length == 0 ) {
         Alert.alert('Wrong Input!', 'Usuario o Contraseña no debe estar vacio.', [
             {text: 'Okay'}
         ]);
         return;
+    }else{
+      return navigation.navigate("CarouselScreen");
     }
-
-    if ( foundUser.length == 0 ) {
-        Alert.alert('Invalid User!', 'Usuario o Conraeña incorrectos.', [
-            {text: 'Okay'}
-        ]);
-        return;
-    }
-    signIn(foundUser);
 }
 
   return (
@@ -205,24 +196,6 @@ const LoginScreen = ({ navigation }) => {
         </TouchableOpacity>
         <View style={styles.button}>
           <TouchableOpacity
-            style={styles.signIn}
-            onPress={() => {
-              loginHandle(data.username, data.password);
-            }}
-          >
-            <Text
-              style={[
-                styles.textSign,
-                {
-                  color: "#fff",
-                },
-              ]}
-            >
-              Sign In
-            </Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
             style={[
               styles.signIn,
               {
@@ -231,7 +204,9 @@ const LoginScreen = ({ navigation }) => {
                 marginTop: 15,
               },
             ]}
-            onPress={() => navigation.navigate("CarouselScreen")}
+            onPress={
+              () => {
+                loginHandle(data.username, data.password);}}
           >
             <Text
               style={[
