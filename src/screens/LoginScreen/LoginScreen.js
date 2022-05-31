@@ -12,24 +12,21 @@ import {
   StatusBar,
   Alert,
 } from "react-native";
-import { gql, useMutation } from '@apollo/client';
+import { gql, useMutation } from "@apollo/client";
 import * as Animatable from "react-native-animatable";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Feather from "react-native-vector-icons/Feather";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const LoginScreen = ({ navigation }) => {
-
   const Auth_User = gql`
     mutation AuthUser($user_name: String!, $password: String!) {
-      authUser(
-        user: { user_name: $userName, password: $password }
-        ) {
+      authUser(user: { user_name: $user_name, password: $password }) {
         token
       }
     }
   `;
-  
+
   const [info, setInfo] = React.useState({
     username: "",
     password: "",
@@ -39,8 +36,12 @@ const LoginScreen = ({ navigation }) => {
     isValidPassword: true,
   });
 
+  const [authUser, { loading,error,data }] = useMutation(Auth_User, {
+     fetchPolicy: 'no-cache',
+    ignoreResults: true,
+  });
+  if (loading) return <Text>Verificando Perfil</Text>;
   
-const [authUser,{data:dataU}] = useMutation(Auth_User);
 
   const textInputChange = (val) => {
     if (val.trim().length >= 4) {
@@ -80,7 +81,7 @@ const [authUser,{data:dataU}] = useMutation(Auth_User);
       });
     }
   };
-  
+
   const handlePasswordChange = (val) => {
     if (val.trim().length >= 8) {
       setInfo({
@@ -96,33 +97,23 @@ const [authUser,{data:dataU}] = useMutation(Auth_User);
       });
     }
   };
-  
-  const loginHandle = async (userName, password) => {
-      if ( info.username.length == 0 || info.password.length == 0 ) {
-        Alert.alert('Wrong Input!', 'Usuario o Contraseña no debe estar vacio.', [
-            {text: 'Okay'}
-        ]);
-    }
-}
 
-const LoginFuck = async (userName, password) => {
-  try {
-    userName=info.username;
-    password=info.password;
-    authUser({ variables: userName, password });
-    console.log(dataU);
-    await AsyncStorage.setItem('@storage_token', dataU);
-    navigation.navigate("CarouselScreen");
-  } catch (e) {
-    console.log('Error '+e);
-  }
-}
+  const loginHandle = async (userName, password) => {
+    if (info.username.length == 0 || info.password.length == 0) {
+      Alert.alert("Wrong Input!", "Usuario o Contraseña no debe estar vacio.", [
+        { text: "Okay" },
+      ]);
+    }
+  };
 
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor="#009387" barStyle="light-content" />
       <View style={styles.header}>
-        <Image style={styles.logo} source={require("../../assets/images/logo.png")} />
+        <Image
+          style={styles.logo}
+          source={require("../../assets/images/logo.png")}
+        />
       </View>
       <Animatable.View
         animation="fadeInUpBig"
@@ -229,12 +220,20 @@ const LoginFuck = async (userName, password) => {
                 marginTop: 15,
               },
             ]}
-            onPress={
-              () => {
-                loginHandle(info.username, info.password);
-                LoginFuck(info.username, info.password);
-              }
-            }
+            onPress={async () => {
+              loginHandle(info.username, info.password);
+                let userName = info.username;
+                let password = info.password;
+                 authUser({
+                  variables: userName,
+                  password,
+                })
+                  console.log(`data: ${userName}`);
+                  await AsyncStorage.setItem("@storage_token", data);
+                  navigation.navigate("CarouselScreen");
+                  
+              
+            }}
           >
             <Text
               style={[
