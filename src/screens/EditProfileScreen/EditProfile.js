@@ -9,6 +9,7 @@ import {
   Keyboard,
   StatusBar,
   Image,
+  Alert
 } from "react-native";
 import { TextInput, Button } from "react-native-paper";
 import { gql, useMutation, useQuery } from "@apollo/client";
@@ -20,56 +21,52 @@ import { GET_USER_ID, GET_USER } from "../../core/queries/Queries";
 
 const IDD = "624b7105672e125fd1b7f93f";
 
-export const SET_USER = gql`
-
-  mutation update(
-    $user_name: String!
-    $email: String!
-    $phoneNumber: String!
-    
-  ) {
-    updateUser(
-      user: {
-        _id: "${IDD}"
-        user_name: $user_name
-        email: $email
-        phoneNumber: $phoneNumber
-      }
-    ) {
-      _id
-      user_name
-      email
-      phoneNumber
-      name
-      rol_id
-      
-    }
-  }
-`;
-
 export const EditProfile = () => {
+
+  const {data}=useQuery(GET_USER);
   const navigation = useNavigation();
-
-  const { loading, error, data } = useQuery(GET_USER_ID);
-  if (loading) return <Text>La informacion del usuario esta cargando</Text>;
-  if (error) return <Text>Error!!+${ID}</Text>;
-
-  const [updateUs] = useMutation(SET_USER);
-
   const [User_name, setUsername] = useState(data.getUserById.user_name);
   const [Email, setEmail] = useState(data.getUserById.email);
   const [PhoneNumber, setPhoneNumber] = useState(data.getUserById.phoneNumber);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const SET_USER = gql`
+  mutation{
+    updateUser(
+          user: {
+            _id:"${IDD}"
+            user_name: "${User_name}"
+            email:"${Email}"
+            phoneNumber:"${PhoneNumber}"
+          }
+        ) {
+          _id
+          user_name
+          email
+          phoneNumber
+          name
+          rol_id
+          
+        }
+      }
+`;
 
-      updateUs({ 
-        variables: {User_name, Email, PhoneNumber}
-      })
-    
-      navigation.navigate("Profile")
 
-  };
+  const [updateUs] = useMutation(SET_USER);
+  const handleSubmit = () => {
+    Alert.alert("Confirmacion",'¿Esta seguro que desea Actualizar el Usuario?', [
+      { 
+        text: 'Ok',
+         onPress:()=>{    
+          updateUs({ 
+          refetchQueries: [{ query: GET_USER_ID}],
+          }), 
+        navigation.navigate("Profile") }
+     },{
+       text:'Cancel'
+     } 
+      ],
+       );
+};
 
   return (
     <SafeAreaView style={{ flex: 1 }}>

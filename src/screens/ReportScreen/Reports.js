@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, ScrollView, SafeAreaView, StatusBar,  Alert } from 'react-native'
+import { View, Text, StyleSheet, ScrollView, SafeAreaView, StatusBar, Alert } from 'react-native'
 import React from 'react'
 import { useState, useContext } from "react";
 import ReportList from '../../components/ReportList/ReportList'
@@ -39,8 +39,7 @@ export default function Page1() {
         refetchQueries: [{ query: GET_REPORTS }],
        });
       }
-    }
-      
+    }    
      ], );
   };
 
