@@ -1,15 +1,49 @@
-import { View, Text, StyleSheet, ScrollView, SafeAreaView, StatusBar } from 'react-native'
+import { View, Text, StyleSheet, ScrollView, SafeAreaView, StatusBar,  Alert } from 'react-native'
 import React from 'react'
+import { useState, useContext } from "react";
 import ReportList from '../../components/ReportList/ReportList'
 import { Button, Title,  IconButton } from 'react-native-paper'
 import * as Animatable from 'react-native-animatable'
 import AppBar from '../../components/AppBar/AppBar'
 import { useNavigation } from '@react-navigation/native'
+import { gql, useMutation } from "@apollo/client";
+import { DataContext } from '../../context/DataContext';
+import { GET_REPORTS } from "../../core/queries/Queries";
 
 
 export default function Page1() {
 
   const navigation = useNavigation();
+
+  const { dato } = useContext(DataContext);
+
+  let id = dato;
+
+  const DELETE_REPORT = gql`
+  mutation{
+    deleteReport(report:{
+      _id:"${id}"
+    })
+  }
+`;
+
+  const [deleteSelectReport] = useMutation(DELETE_REPORT, {
+    onError: (error) => Alert.alert("Selection Error","Debes seleccionar un Reporte para Borrar !!"),
+  });
+   const handleSubmit = () => {
+    Alert.alert("Confirma",'¿Estas seguro que deseas borrar este Reporte?.', [
+     { 
+       text: 'Ok',mode:'cancel',
+        onPress:()=>{  
+        deleteSelectReport({
+        refetchQueries: [{ query: GET_REPORTS }],
+       });
+      }
+    }
+      
+     ], );
+  };
+
   return (
     <SafeAreaView style={styles.safe}>
        <StatusBar backgroundColor="#253659" />
@@ -34,7 +68,7 @@ export default function Page1() {
             color="#9E7B2C"
             onPress={() => navigation.navigate("CreateReport")}
           >
-            Nuevo Reporte
+            New Report
           </Button>
           <Button
             style={styles.button2}
@@ -43,7 +77,16 @@ export default function Page1() {
             color="#9E7B2C"
             onPress={() => navigation.navigate("Graphics")}
           >
-            Mostrar Grafica
+            Show Graph
+          </Button>
+          <Button
+            style={styles.button3}
+            icon="delete"
+            mode="contained"
+            color="#b32821"
+            onPress={() =>handleSubmit()}
+          >
+            Del
           </Button>
         </View>
       </Animatable.View>
@@ -70,11 +113,15 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   button1: {
-    width: 180,
+    width: 140,
     height: 40,
   },
   button2: {
-    width: 180,
+    width: 140,
+    height: 40,
+  },
+  button3: {
+    width: 80,
     height: 40,
   },
   report_container: {
